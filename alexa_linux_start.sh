@@ -85,9 +85,9 @@ rm /home/$USER/Desktop/IDE/WebStorm.tar.gz
 
 
 sudo gnome-terminal \
---tab -e "bash -ic \"sleep 10s; sudo docker rm -f alexa_cli; sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa_cli falent/alexa-cli ; exec bash\"" \
---tab -e "bash -ic \"sleep 15s; sudo docker rm -f alexa; sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa falent/alexa_http_server; exec bash\"" \
---tab -e "bash -ic \"sudo docker network create myNetwork; sudo docker rm -f alexa; sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa_tunnel falent/alexa_tunnel; exec bash\"" \
+--tab -e "bash -ic \"sleep 5s; sudo docker rm -f alexa_cli; sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa_cli falent/alexa-cli ; exec bash\"" \
+--tab -e "bash -ic \"sleep 10s; sudo docker rm -f alexa; sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa falent/alexa_http_server; exec bash\"" \
+--tab -e "bash -ic \"sudo docker network create myNetwork; sudo docker rm -f alexa_tunnel;  sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa_tunnel falent/alexa_tunnel; exec bash\"" \
 --tab -e "bash -ic \"sleep 30s; sudo service mongod stop; sudo docker rm -f /mongo_database;  sleep 5s; sudo docker rm -f mongo; sudo docker run --name mongo_database -d --network myNetwork -p 27017:27017 mongo --noauth; exec bash\"" \
 --tab -e "bash -ic \"sleep 30ssudo docker rm -f dynamo_database; sudo docker run -v "$PWD":/dynamodb_local_db --network myNetwork -p 8000:8000 --name dynamo_database cnadiminti/dynamodb-local:latest; exec bash\"" \
 --tab -e "bash -ic \"sleep 30ssudo docker rm -f mysql_database ; sudo docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=pass@word01  --network myNetwork --name mysql_database centurylink/mysql; exec bash\"" \
