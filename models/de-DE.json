@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "Opitz Baumarkt",
+      "invocationName": "opitz baumarkt",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
