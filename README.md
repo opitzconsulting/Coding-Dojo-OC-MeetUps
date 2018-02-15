@@ -1,16 +1,12 @@
-**There are three ways to set-up your environment for developing Alexa skills during our Hackathon  on February 26, 2018**:
+**There are three ways to set-up your environment for developing Alexa skills during our Hackathon  on February 26, 2018**. You can use ready VM (https://drive.google.com/file/d/1njIgepwzL85JYFIMrVLIcdbe4wL6FlV7/view ) or use described here Docker Solution with your lokal machine or programm Alexa in the other way ;)
 
+My solution is based on node.js and lokal docker environment. You can add to your development stack so many technologies you want. Everything is possible with Docker!
 
 # 1 Amazon Developer Account
 
 [Please register at the Amazon Developer Portal ](http://developer.amazon.com/)
 It's free of charge. If you already have an Amazon account, then you don't have to register. You can use the credentials of your existing account. Without the Amazon Developer Console you won't be able to write an Alexa skill.
 
-
-You can download ready VM with automated script and Webstorm installed:
-
-
-or install everything with a docker :) I added instructions how to integrate my solution with a mongoDB or DynamoDB or mySQL 
 
 # 2 Docker Installation
 
@@ -20,18 +16,7 @@ Install [Docker CE (Community Edition)](https://docs.docker.com/engine/installat
 
 # 3 Docker Containers 
 
-
-Firstly, open a terminal and create a new Docker network:
-
-`$ sudo docker network create myNetwork`
-
-Open a run the _ngrok_ Docker container in your terminal:
-
-`$ sudo docker run --rm --network myNetwork -it wernight/ngrok ngrok http alexa:8001 `
-
-Read through the console output of the ngrok Docker container and copy the *https address*. In my case it was `https://bb517728.ngrok.io`.
-
-Open a second terminal tab and clone my git repository from Github:
+Open a first terminal tab and clone my git repository from Github:
 
 `$ git clone https://github.com/falent/Alexa_universal_skill_template_cli.git  ~/Desktop/Template/Alexa_universal_skill_template `
 
@@ -39,20 +24,34 @@ Go to the cloned git repository:
 
 `$ cd ~/Desktop/Template/Alexa_universal_skill_template`
 
-Run an _Alexa_ Docker container:
+Create a new Docker network:
+
+`$ sudo docker network create myNetwork`
+
+Open a new tab and run the _ngrok_ Docker container in your terminal:
+
+* On Linux:
+
+`$ sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa_tunnel falent/alexa_tunnel `
+  
+* On Windows:
+  Replace the path with the absolute path to your cloned git repository, e.g. _//c/Users/john/Desktop/Alexa_universal_skill_template_ (:warning: Leading double slashes!!!).
+
+  `$ docker run -v <ABSOLUTE_PATH_TO_CLONED_GIT_REPO>:/skill -it --network myNetwork --name alexa_tunnel falent/alexa_tunnel`
+
+Open a new tab and run an _Alexa_ Docker container:
 
 * On Linux:
 
   `$ sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa falent/alexa_http_server`
   
 * On Windows:
-  Replace the path with the absolute path to your cloned git repository, e.g. _//c/Users/john/Desktop/Alexa_universal_skill_template_ (:warning: Leading double slashes!!!).
 
   `$ docker run -v <ABSOLUTE_PATH_TO_CLONED_GIT_REPO>:/skill -it --network myNetwork --name alexa falent/alexa_http_server`
   
 (it can happens that you wish to add more modules to your skill. In that case you just need to restart your container)
 
-Open a third terminal tab and start Alexa CLI Container:
+Open a new terminal tab and start Alexa CLI Container:
 
   `$  sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa_cli falent/alexa-cli`
 
@@ -75,19 +74,13 @@ Run a _DynamoDB_ Docker container:
 
 
 # 4 Configuration
-Amazon supporting since couple weeks a new tool: Alexa CLI. With that tool you can faster develop a skill in a developer portal.
+Amazon supporting since couple months a new tool: Alexa CLI. With that tool you can faster develop a skill in your console rather than in a developer portal.
 
 In docker terminal tab Alexa CLI just write:
 
   `$ ask init --no-browser`
 
-You log to your account using browser authentication. You need to copy the url adress given in cli Alexa and log in to your account.
-
-After that just copy your ngrok address and edit file: skill.json replacing:
-  
-  `https://your_individual_ngrok_address.io`
-
-with your individual ngrok address.  
+You log to your account using browser authentication. 
 
 now in the cli docker container just write:
 
