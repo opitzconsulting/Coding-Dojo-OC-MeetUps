@@ -1,4 +1,4 @@
-**There are three ways to set-up your environment for developing Alexa skills during our Hackathon  on February 26, 2018**. You can use ready VM (https://drive.google.com/file/d/1njIgepwzL85JYFIMrVLIcdbe4wL6FlV7/view ) or use described here Docker Solution with your lokal machine or programm Alexa in the other way ;)
+**There are three ways to set-up your environment for developing Alexa skills during oyour Alexa event*. You can use ready VM (https://drive.google.com/file/d/1njIgepwzL85JYFIMrVLIcdbe4wL6FlV7/view ) or use described here Docker Solution with your lokal machine or programm Alexa in the other way ;)
 
 My solution is based on node.js and lokal docker environment. You can add to your development stack so many technologies you want. Everything is possible with Docker!
 
@@ -16,7 +16,7 @@ Install [Docker CE (Community Edition)](https://docs.docker.com/engine/installat
 
 # 3 Docker Containers 
 
-Open a first terminal tab and clone my git repository from Github:
+Open a first terminal tab and clone my git repository from Github. Please do all steps in that order which are described here :)
 
 `$ git clone https://github.com/falent/Alexa_universal_skill_template_cli.git  ~/Desktop/Template/Alexa_universal_skill_template `
 
@@ -55,6 +55,8 @@ Open a new terminal tab and start Alexa CLI Container:
 
   `$  sudo docker run -v ~/Desktop/Template/Alexa_universal_skill_template:/skill -it --network myNetwork --name alexa_cli falent/alexa-cli`
 
+
+**OPTIONAL**
 
 You can add to your stack also any database f.e
 
